@@ -1,6 +1,7 @@
 from src.algorithms.tsp_bnb import tsp_bnb
 from src.calculate.distance import euclidean_distance
 import os
+import psutil
 
 def read_tsp_file(file_path):
     with open(file_path, 'r') as file:
@@ -39,12 +40,23 @@ def calculate_distance_matrix(node_coordinates):
 
     return distance_matrix
 
-#berlin52
-file_path = os.path.abspath(os.path.join('lib', 'berlin14.tsp'))
-node_coordinates = read_tsp_file(file_path)
-distance_matrix = calculate_distance_matrix(node_coordinates)
 
-best_path, best_cost = tsp_bnb(distance_matrix)
+instance = ['a0', 'a280', 'berlin52']
+for i in instance:
+    print("Instancia: ", i)
+    
+    file_path = os.path.abspath(os.path.join('lib', f'{i}.tsp'))
+    node_coordinates = read_tsp_file(file_path)
+    distance_matrix = calculate_distance_matrix(node_coordinates)
 
-print("Melhor caminho:", best_path)
-print("Custo mínimo:", best_cost)
+    #Inicio Memória
+    start_space = psutil.virtual_memory().used
+    #Algoritmo TSP
+    best_path, best_cost = tsp_bnb(distance_matrix)
+    end_space = psutil.virtual_memory().used
+    #Fim Memória
+    used_space = (end_space - start_space) / (1024 * 1024)
+
+    if(best_path != None and best_cost!= None):
+        print(f"Espaço Utilizado: {used_space} MB")
+        print("Custo Mínimo:", best_cost)
