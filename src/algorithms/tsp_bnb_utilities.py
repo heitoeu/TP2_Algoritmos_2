@@ -43,7 +43,7 @@ def cycle_cost(A, path):
     edge_cost = A[v][w]
     cost += edge_cost
 
-  return cost + A[path[-1]][path[0]]
+  return math.ceil(cost + A[path[-1]][path[0]])
 
 # Lower Bound visto em sala usando as duas menores arestas
 def lower_bound(A, path, bound_parent, M):

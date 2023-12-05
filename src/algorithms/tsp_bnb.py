@@ -19,8 +19,8 @@ def tsp_bnb(A):
       if node.cost < best:
         best = node.cost
         sol =  node.path + [0]
-        print("Melhor caminho até o momento:", sol)
-        print("Custo mínimo até o momento:", best)
+        #print("Melhor caminho até o momento:", sol)
+        #print("Custo mínimo até o momento:", best)
 
     elif node.bound < best:  #Caso uma estimativa seja melhor que o melhor custo até o momento
       for i in range(1, n):
