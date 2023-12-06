@@ -1,51 +1,58 @@
 from .tsp_bnb_utilities import *
+import heapq
 import time
 
-def tsp_bnb(A, tempo_limite=240):
-  #Monitorar o tempo
-  inicio_tempo = time.time()
 
-  M = min_edges(A)
-  n = len(M)
+def tsp_bnb(A, tempo_limite=120):
+    # Monitorar o tempo
+    inicio_tempo = time.time()
 
-  root = Node(first_bound(M), [0], math.inf, 0) #lb, path, cost, path
-  queue = [(root)]
+    # Lista das duas menores arestas de cada vértice
+    M = min_edges(A)
+    n = len(M)
 
-  best = math.inf
-  sol = []
+    root = Node(first_bound(M), [0], 0)
+    queue = [(root)]
+    best = math.inf
+    sol = []
 
-  print("Lower Bound da Raiz: ", root.bound)
+    # Roda enquanto existir nodes frutiferos
+    while queue:
+        cycle = math.inf
+        node = heapq.heappop(queue)
 
-  while queue:
-    node = queue.pop()
+        # Caso uma estimativa seja melhor que o melhor custo
+        if node.bound < best:
+            if node.level < n-1:
+                for i in range(1, n):
+                    # Apenas combinações de vértices que ainda não foram incluidos no caminho
+                    if i not in node.path:
+                        # Exclui permutações equivalentes computando só uma das orientações
+                        if 2 in node.path and 1 not in node.path:
+                            continue
+                        lb = lower_bound(A, node.path + [i], node.bound, M)
+                        # Se a bound é produtiva
+                        if lb < best:
+                            # Se não é uma folha adiciona na fila
+                            if (node.level + 1 < n-2):
+                                next_node = Node(
+                                    lb, node.path + [i], node.level+1)
+                                heapq.heappush(queue, next_node)
+                            else:
+                                # Se é uma folha computo o ciclo
+                                cycle_path = cycle_complete(A, node.path+[i])
+                                cycle = cycle_cost(A, cycle_path)
+                                if (cycle < best):
+                                    best = cycle
+                                    sol = cycle_path
 
-    if node.level == n-1:      #Se o node concluiu um ciclo
-      if node.cost < best:
-        best = node.cost
-        sol =  node.path + [0]
-        #print("Melhor caminho até o momento:", sol)
-        #print("Custo mínimo até o momento:", best)
-
-    elif node.bound < best:  #Caso uma estimativa seja melhor que o melhor custo até o momento
-      for i in range(1, n):
-        # Vértices que ainda não foram incluidos
-          if i not in node.path:
-              # Exclui permutações equivalentes computando só uma das orientações
-              if 2 in node.path and 1 not in node.path:
-                continue
-              lb = lower_bound(A, node.path + [i], node.bound, M)
-              if lb < best:
-                if(node.level + 1 != n-1):
-                  queue.append(Node(lb, node.path + [i], math.inf, node.level+1))
-                else:
-                  queue.append(Node(lb, node.path + [i], lb, node.level+1))
-
-  #Parar a execução se estiver demorando muito (pior caso ainda é O(n!))
-    tempo_atual = time.time() - inicio_tempo
-    if tempo_atual > tempo_limite:
+    # Parar a execução se estiver demorando muito (pior caso ainda é O(n!))
+        tempo_atual = time.time() - inicio_tempo
+        if tempo_atual > tempo_limite:
             print(f"Custo Mínimo: NA ({tempo_limite} segundos).")
             return None, None
 
-  tempo_execucao = time.time() - inicio_tempo
-  print(f"Tempo de Execução: {tempo_execucao} segundos")
-  return sol, best
+    tempo_execucao = time.time() - inicio_tempo
+    print(f"Tempo de Execução: {tempo_execucao} segundos")
+    print(f"Solução:{sol+[0]} custo {best}")
+    return sol, best
