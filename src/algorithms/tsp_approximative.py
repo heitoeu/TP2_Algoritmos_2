@@ -1,4 +1,5 @@
 from igraph import Graph
+import math
 
 
 # Caminhamento preorder recursivo
@@ -23,4 +24,4 @@ def cycle_cost_igraph(graph, cycle):
     edge = graph.es.find(_source=cycle[-1], _target=cycle[0])
     total_cost += edge['weight']
 
-    return total_cost
+    return math.ceil(total_cost)

@@ -1,4 +1,5 @@
-from src.algorithms.tsp_bnb import tsp_bnb
+from src.algorithms.tsp_bnb import *
+from src.algorithms.tsp_tat import *
 from src.calculate.distance import euclidean_distance
 import os
 
@@ -43,13 +44,41 @@ def calculate_distance_matrix(node_coordinates):
     return distance_matrix
 
 
-instance = ['a0', 'a280', 'berlin52']
+def create_igraph_from_distance_matrix(node_coordinates):
+    num_nodes = len(node_coordinates)
+
+    # Cria um grafo ponderado
+    g = Graph()
+    g.add_vertices(num_nodes)
+
+    # Adiciona as arestas ponderadas com as distâncias sem duplicatas
+    for i in range(num_nodes):
+        for j in range(i + 1, num_nodes):
+            distance = euclidean_distance(
+                node_coordinates[i], node_coordinates[j])
+            g.add_edge(i, j, weight=float(distance))
+
+    return g
+
+
+instance = ['a0', 'a280', 'berlin52', 'bier127', 'fl417', 'fl1400', 'fl1577']
 for i in instance:
     print("Instancia: ", i)
 
     file_path = os.path.abspath(os.path.join('lib', f'{i}.tsp'))
     node_coordinates = read_tsp_file(file_path)
-    distance_matrix = calculate_distance_matrix(node_coordinates)
+    print("Criando lista de adjacencia")
+    graph_matrix = calculate_distance_matrix(node_coordinates)
+    print("Lista de adjacencia criada!")
 
-    # Algoritmo TSP
-    best_path, best_cost = tsp_bnb(distance_matrix)
+    print("Criando Grafo da iGraph")
+    graph_list = create_igraph_from_distance_matrix(node_coordinates)
+    print("Grafo da iGraph criado criado!")
+
+    # Algoritmo TSP_BNB
+    print("TSP_BNB")
+    best_path, best_cost = tsp_bnb(graph_matrix)
+
+    # Algoritmo TSP_TAT
+    print("TSP_TAT")
+    best_path, best_cost = tsp_tat(graph_list)
