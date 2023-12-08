@@ -1,15 +1,18 @@
-from igraph import Graph
+from .tsp_approximative import *
+
 
 def tsp_tat(g):
+    root = 0
+    # Computa a minimum spanning tree
     mst = g.spanning_tree(weights=g.es["weight"])
-    print(type(mst))
 
-    return
+    # Caminhamento preorder para obter o ciclo hamiltoniano
+    visited = [False] * g.vcount()
+    preorder_result = []
+    pre_order(mst, root, visited, preorder_result)
 
-g = Graph(directed=False)
-g.add_vertices(4)
-g.add_edges([(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)])
-g.es["weight"] = [2, 3, 1, 4, 5, 6]
+    # Calcula o custo e completa o ciclo com a raiz
+    approximative_best = cycle_cost_igraph(g, preorder_result)
+    sol = preorder_result + [root]
 
-tsp_tat(g)
-print(g)
+    return sol, approximative_best
