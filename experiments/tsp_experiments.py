@@ -1,5 +1,6 @@
 from src.algorithms.tsp_bnb import *
 from src.algorithms.tsp_tat import *
+from src.algorithms.tsp_christofides import *
 from src.calculate.distance import euclidean_distance
 import os
 
@@ -61,24 +62,18 @@ def calculate_distance_matrix(node_coordinates):
     return distance_matrix
 
 
-def create_igraph_from_distance_matrix(node_coordinates):
+def create_networkx_graph(node_coordinates):
     num_nodes = len(node_coordinates)
+    g = nx.Graph()
 
-    # Cria um grafo ponderado
-    g = Graph()
-    g.add_vertices(num_nodes)
+    g.add_nodes_from(range(num_nodes))
 
-    # Adiciona as arestas ponderadas com as distâncias
+    # Computar as arestas e seus pesos na lista
     edges = [(i, j, euclidean_distance(node_coordinates[i], node_coordinates[j]))
              for i in range(num_nodes) for j in range(i + 1, num_nodes)]
 
-    # Extrai as arestas para formatar corretamente
-    edge_list = [(i, j) for i, j, _ in edges]
-
-    g.add_edges(edge_list)
-
-    # Atribui os pesos às arestas
-    g.es['weight'] = [float(distance) for _, _, distance in edges]
+    # Adiciona as arestas ao grafo com os pesos
+    g.add_weighted_edges_from(edges)
 
     return g
 
@@ -95,7 +90,7 @@ for i in instance:
     # Criando os Grafos
     node_coordinates = read_tsp_file(file_path)
     graph_matrix = calculate_distance_matrix(node_coordinates)
-    graph_list = create_igraph_from_distance_matrix(node_coordinates)
+    graph_list = create_networkx_graph(node_coordinates)
 
     # Algoritmo TSP_BNB
     print("TSP_BNB")
@@ -104,5 +99,9 @@ for i in instance:
     # Algoritmo TSP_TAT
     print("TSP_TAT")
     best_path, best_cost = tsp_tat(graph_list)
+
+    # Algoritmo TSP_CHRIS
+    print("TSP_CHRIS")
+    best_path, best_cost = tsp_christofides(graph_list)
 
     print("\n")

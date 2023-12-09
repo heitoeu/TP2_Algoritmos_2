@@ -8,13 +8,13 @@ def tsp_tat(g):
 
     root = 0
     # Computa a minimum spanning tree
-    mst = g.spanning_tree(weights=g.es["weight"])
+    mst = nx.minimum_spanning_tree(g)
 
     # Caminhamento preorder para obter o ciclo hamiltoniano
-    preorder_result = pre_order_iterative(mst, root)
+    preorder_result = list(nx.dfs_preorder_nodes(mst))
 
     # Calcula o custo e completa o ciclo com a raiz
-    approximative_best = cycle_cost_igraph(g, preorder_result)
+    approximative_best = cycle_cost_networkx(g, preorder_result)
     sol = preorder_result + [root]
 
     t = time.time() - inicio_tempo

@@ -3,7 +3,7 @@ import heapq
 import time
 
 
-def tsp_bnb(A, tempo_limite=60):
+def tsp_bnb(A, tempo_limite=1):
     # Monitorar o tempo
     inicio_tempo = time.time()
 

@@ -1,4 +1,4 @@
-from ..algorithms.tsp_tat import *
+from ..algorithms.tsp_christofides import *
 
 # Grafo do livro
 grafo_vimieiro = nx.Graph()
@@ -14,7 +14,4 @@ grafo_vimieiro.add_edges_from([(0, 1, {'weight': 4}),
                                (1, 3, {'weight': 8})])
 
 
-print("Clique: ", grafo_vimieiro)
-
-path, value = tsp_tat(grafo_vimieiro)
-print(f"Caminho encontrado: {path} com peso de {value}")
+tsp_christofides(grafo_vimieiro)
