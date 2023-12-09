@@ -1,4 +1,5 @@
 Dataset	Nós	Limiar
+a0	12	0
 eil51	51	426
 berlin52	52	7542
 st70	70	675

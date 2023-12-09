@@ -1,14 +1,25 @@
-from igraph import Graph
+from igraph import *
 import math
 
 
-# Caminhamento preorder recursivo
-def pre_order(g, root, visited, result):
-    visited[root] = True
-    result.append(root)
-    for n in g.neighbors(root):
-        if not visited[n]:
-            pre_order(g, n, visited, result)
+# Caminhamento preorder iterativo
+def pre_order_iterative(g, root):
+    visited = [False] * g.vcount()
+    result = []
+    stack = [root]
+
+    while stack:
+        current_vertex = stack.pop()
+
+        if not visited[current_vertex]:
+            visited[current_vertex] = True
+            result.append(current_vertex)
+            # Empilhe os vizinhos não visitados do vértice atual
+            # stack.extend(n for n in g.neighbors(current_vertex) if not visited[n])
+            stack.extend(n for n in reversed(
+                g.neighbors(current_vertex)) if not visited[n])
+
+    return result
 
 
 # Função para calcular o ciclo de um grafo da bibiloteca iGraph

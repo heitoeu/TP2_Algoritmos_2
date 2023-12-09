@@ -30,6 +30,23 @@ def read_tsp_file(file_path):
     return node_coordinates
 
 
+def read_dataset_names(file_path):
+    dataset_names = []
+
+    with open(file_path, 'r') as file:
+        # Pular a primeira linha, pois contém os cabeçalhos
+        next(file)
+
+        for line in file:
+            # Dividir a linha usando tabulação como delimitador
+            parts = line.split('\t')
+
+            # Adicionar o nome do dataset à lista
+            dataset_names.append(parts[0])
+
+    return dataset_names
+
+
 def calculate_distance_matrix(node_coordinates):
     n = len(node_coordinates)
     distance_matrix = [[0] * n for _ in range(n)]
@@ -51,29 +68,34 @@ def create_igraph_from_distance_matrix(node_coordinates):
     g = Graph()
     g.add_vertices(num_nodes)
 
-    # Adiciona as arestas ponderadas com as distâncias sem duplicatas
-    for i in range(num_nodes):
-        for j in range(i + 1, num_nodes):
-            distance = euclidean_distance(
-                node_coordinates[i], node_coordinates[j])
-            g.add_edge(i, j, weight=float(distance))
+    # Adiciona as arestas ponderadas com as distâncias
+    edges = [(i, j, euclidean_distance(node_coordinates[i], node_coordinates[j]))
+             for i in range(num_nodes) for j in range(i + 1, num_nodes)]
+
+    # Extrai as arestas para formatar corretamente
+    edge_list = [(i, j) for i, j, _ in edges]
+
+    g.add_edges(edge_list)
+
+    # Atribui os pesos às arestas
+    g.es['weight'] = [float(distance) for _, _, distance in edges]
 
     return g
 
 
-instance = ['a0', 'a280', 'berlin52', 'bier127', 'fl417', 'fl1400', 'fl1577']
+data_set_path = os.path.abspath(
+    os.path.join('experiments', f'tp2_datasets.txt'))
+instance = read_dataset_names(data_set_path)
+
 for i in instance:
     print("Instancia: ", i)
 
     file_path = os.path.abspath(os.path.join('lib', f'{i}.tsp'))
-    node_coordinates = read_tsp_file(file_path)
-    print("Criando lista de adjacencia")
-    graph_matrix = calculate_distance_matrix(node_coordinates)
-    print("Lista de adjacencia criada!")
 
-    print("Criando Grafo da iGraph")
+    # Criando os Grafos
+    node_coordinates = read_tsp_file(file_path)
+    graph_matrix = calculate_distance_matrix(node_coordinates)
     graph_list = create_igraph_from_distance_matrix(node_coordinates)
-    print("Grafo da iGraph criado criado!")
 
     # Algoritmo TSP_BNB
     print("TSP_BNB")
@@ -82,3 +104,5 @@ for i in instance:
     # Algoritmo TSP_TAT
     print("TSP_TAT")
     best_path, best_cost = tsp_tat(graph_list)
+
+    print("\n")
