@@ -49,12 +49,11 @@ def tsp_bnb(A, tempo_limite=1):
     # Parar a execução se estiver demorando muito (pior caso ainda é O(n!))
         tempo_atual = time.time() - inicio_tempo
         if tempo_atual > tempo_limite:
-            print(f"Custo Mínimo: NA ({tempo_limite} segundos).")
-            return None, None
+            return "NA", "NA", "NA"
 
     t = time.time() - inicio_tempo
     tempo_execucao = "{:.2f}".format(t)
-    print(f"Tempo de Execução: {tempo_execucao} segundos")
+    # print(f"Tempo de Execução: {tempo_execucao} segundos")
     # print(f"Solução:{sol+[0]} custo {best}")
-    print(f"Custo {best}")
-    return sol, best
+    # print(f"Custo {best}")
+    return best, tempo_execucao, 0

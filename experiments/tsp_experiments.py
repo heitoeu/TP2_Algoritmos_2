@@ -1,8 +1,9 @@
 from src.algorithms.tsp_bnb import *
 from src.algorithms.tsp_tat import *
 from src.algorithms.tsp_christofides import *
-from src.calculate.distance import euclidean_distance
+from src.algorithms.distance import euclidean_distance
 import os
+import csv
 
 
 def read_tsp_file(file_path):
@@ -82,26 +83,37 @@ data_set_path = os.path.abspath(
     os.path.join('experiments', f'tp2_datasets.txt'))
 instance = read_dataset_names(data_set_path)
 
-for i in instance:
-    print("Instancia: ", i)
+# Caminho para o arquivo CSV de saída
+output_csv_path = os.path.abspath(os.path.join('output', 'resultados_tsp.csv'))
 
-    file_path = os.path.abspath(os.path.join('lib', f'{i}.tsp'))
+# Abrir o arquivo CSV para escrita
+with open(output_csv_path, 'w', newline='') as csvfile:
+    # Criar o objeto de escrita CSV
+    csv_writer = csv.writer(csvfile)
 
-    # Criando os Grafos
-    node_coordinates = read_tsp_file(file_path)
-    graph_matrix = calculate_distance_matrix(node_coordinates)
-    graph_list = create_networkx_graph(node_coordinates)
+    # Escrever cabeçalhos no arquivo CSV
+    csv_writer.writerow(
+        ['Instance', 'Algorithm', 'Cost', 'Time', 'Memory'])
 
-    # Algoritmo TSP_BNB
-    print("TSP_BNB")
-    best_path, best_cost = tsp_bnb(graph_matrix)
+    for i in instance:
 
-    # Algoritmo TSP_TAT
-    print("TSP_TAT")
-    best_path, best_cost = tsp_tat(graph_list)
+        file_path = os.path.abspath(os.path.join('lib', f'{i}.tsp'))
 
-    # Algoritmo TSP_CHRIS
-    print("TSP_CHRIS")
-    best_path, best_cost = tsp_christofides(graph_list)
+        # Criando os Grafos
+        node_coordinates = read_tsp_file(file_path)
+        graph_matrix = calculate_distance_matrix(node_coordinates)
+        graph_list = create_networkx_graph(node_coordinates)
 
-    print("\n")
+        # Algoritmo TSP_BNB
+        best_cost, time, memory = tsp_bnb(graph_matrix)
+        csv_writer.writerow([i, 'TSP_BNB', best_cost, time, memory])
+
+        # Algoritmo TSP_TAT
+        best_cost, time, memory = tsp_tat(graph_list)
+        csv_writer.writerow([i, 'TSP_TAT', best_cost, time, memory])
+
+        # Algoritmo TSP_CHRIS
+        best_cost, time, memory = tsp_christofides(graph_list)
+        csv_writer.writerow([i, 'TSP_CHRIS', best_cost, time, memory])
+
+        # csv_writer.writerow('\n')

@@ -6,7 +6,7 @@ def tsp_christofides(g):
     # Monitorar o tempo
     inicio_tempo = time.time()
 
-    root = 0
+    root = 1
     # Computa a minimum spanning tree
     mst = nx.minimum_spanning_tree(g)
 
@@ -22,7 +22,7 @@ def tsp_christofides(g):
     mst.add_edges_from(matching_edges)
 
     # Caminhamento preorder para obter o ciclo hamiltoniano
-    preorder_result = list(nx.dfs_preorder_nodes(mst))
+    preorder_result = list(nx.dfs_preorder_nodes(mst, root))
 
     # Calcula o custo e completa o ciclo com a raiz
     approximative_best = cycle_cost_networkx(g, preorder_result)
@@ -30,7 +30,7 @@ def tsp_christofides(g):
 
     t = time.time() - inicio_tempo
     tempo_execucao = "{:.2f}".format(t)
-    print(f"Tempo de Execução: {tempo_execucao} segundos")
-    print(f"Custo {approximative_best}")
+    # print(f"Tempo de Execução: {tempo_execucao} segundos")
+    # print(f"Custo {approximative_best}")
 
-    return sol, approximative_best
+    return approximative_best, tempo_execucao, 0

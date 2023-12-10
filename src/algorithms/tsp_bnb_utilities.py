@@ -73,7 +73,7 @@ def lower_bound(A, path, bound_parent, M):
     # Primeiro em relação a W
     if ((first_min_w != A[v][w] and second_min_w != A[v][w])):
         new_bound = (2*new_bound + A[v][w] - second_min_w)/2
-        # Segundo em relação a V
+    # Segundo em relação a V
     if (first_min_v != A[v][w] and second_min_v != A[v][w]):
         new_bound = (2*new_bound + A[v][w] - second_min_v)/2
 
