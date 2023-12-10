@@ -1,0 +1,213 @@
+Algorithm,Instance,Nodes,Limiar,Cost,Quality,Time(sec),Memory(MB)
+Branch and Bound,a0,12,4057,4057,1.0,1.03,0.02
+Twice Around the Tree,a0,12,4057,4558,1.12,0.00,0.04
+Christofides,a0,12,4057,4400,1.08,0.00,0.06
+Branch and Bound,eil51,51,426,NA,NA,NA,0.39
+Twice Around the Tree,eil51,51,426,612,1.44,0.01,0.14
+Christofides,eil51,51,426,589,1.38,0.03,0.14
+Branch and Bound,berlin52,52,7542,NA,NA,NA,0.4
+Twice Around the Tree,berlin52,52,7542,10278,1.36,0.01,0.06
+Christofides,berlin52,52,7542,8512,1.13,0.03,0.12
+Branch and Bound,st70,70,675,NA,NA,NA,0.85
+Twice Around the Tree,st70,70,675,879,1.3,0.01,0.16
+Christofides,st70,70,675,877,1.3,0.08,0.25
+Branch and Bound,eil76,76,538,NA,NA,NA,1.04
+Twice Around the Tree,eil76,76,538,697,1.3,0.01,0.16
+Christofides,eil76,76,538,649,1.21,0.10,0.33
+Branch and Bound,pr76,76,108159,NA,NA,NA,1.04
+Twice Around the Tree,pr76,76,108159,145928,1.35,0.01,0.16
+Christofides,pr76,76,108159,133615,1.24,0.04,0.2
+Branch and Bound,rat99,99,1211,NA,NA,NA,2.07
+Twice Around the Tree,rat99,99,1211,1724,1.42,0.03,0.51
+Christofides,rat99,99,1211,1567,1.29,0.12,0.37
+Branch and Bound,kroA100,100,21282,NA,NA,NA,2.13
+Twice Around the Tree,kroA100,100,21282,27585,1.3,0.02,0.38
+Christofides,kroA100,100,21282,25862,1.22,0.15,0.47
+Branch and Bound,kroB100,100,22141,NA,NA,NA,2.12
+Twice Around the Tree,kroB100,100,22141,26770,1.21,0.03,0.38
+Christofides,kroB100,100,22141,25033,1.13,0.10,0.38
+Branch and Bound,kroC100,100,20749,NA,NA,NA,2.12
+Twice Around the Tree,kroC100,100,20749,27826,1.34,0.03,0.38
+Christofides,kroC100,100,20749,27572,1.33,0.14,0.47
+Branch and Bound,kroD100,100,21294,NA,NA,NA,2.12
+Twice Around the Tree,kroD100,100,21294,28071,1.32,0.03,0.52
+Christofides,kroD100,100,21294,27850,1.31,0.14,0.41
+Branch and Bound,kroE100,100,22068,NA,NA,NA,2.12
+Twice Around the Tree,kroE100,100,22068,28817,1.31,0.03,0.38
+Christofides,kroE100,100,22068,29396,1.33,0.18,0.53
+Branch and Bound,rd100,100,7910,NA,NA,NA,2.12
+Twice Around the Tree,rd100,100,7910,10767,1.36,0.03,0.38
+Christofides,rd100,100,7910,11321,1.43,0.22,0.56
+Branch and Bound,eil101,101,629,NA,NA,NA,2.18
+Twice Around the Tree,eil101,101,629,849,1.35,0.02,0.39
+Christofides,eil101,101,629,793,1.26,0.20,0.61
+Branch and Bound,lin105,105,14379,NA,NA,NA,2.41
+Twice Around the Tree,lin105,105,14379,19508,1.36,0.04,0.43
+Christofides,lin105,105,14379,20816,1.45,0.18,0.43
+Branch and Bound,pr107,107,44303,NA,NA,NA,2.53
+Twice Around the Tree,pr107,107,44303,53896,1.22,0.03,0.45
+Christofides,pr107,107,44303,57161,1.29,0.10,0.5
+Branch and Bound,pr124,124,59030,NA,NA,NA,3.75
+Twice Around the Tree,pr124,124,59030,73356,1.24,0.04,0.65
+Christofides,pr124,124,59030,73281,1.24,0.09,0.65
+Branch and Bound,bier127,127,118282,NA,NA,NA,3.99
+Twice Around the Tree,bier127,127,118282,158755,1.34,0.06,0.68
+Christofides,bier127,127,118282,141361,1.2,0.49,0.97
+Branch and Bound,ch130,130,6110,NA,NA,NA,4.24
+Twice Around the Tree,ch130,130,6110,8228,1.35,0.04,0.72
+Christofides,ch130,130,6110,7245,1.19,0.20,0.72
+Branch and Bound,pr136,136,96772,NA,NA,NA,4.79
+Twice Around the Tree,pr136,136,96772,151922,1.57,0.05,0.8
+Christofides,pr136,136,96772,110916,1.15,0.11,0.8
+Branch and Bound,pr144,144,58537,NA,NA,NA,5.58
+Twice Around the Tree,pr144,144,58537,80365,1.37,0.05,0.91
+Christofides,pr144,144,58537,64799,1.11,0.08,0.91
+Branch and Bound,ch150,150,6528,NA,NA,NA,6.23
+Twice Around the Tree,ch150,150,6528,8634,1.32,0.06,1.01
+Christofides,ch150,150,6528,8385,1.28,0.33,1.01
+Branch and Bound,kroA150,150,26524,NA,NA,NA,6.23
+Twice Around the Tree,kroA150,150,26524,35793,1.35,0.06,1.01
+Christofides,kroA150,150,26524,34417,1.3,0.50,1.01
+Branch and Bound,kroB150,150,26130,NA,NA,NA,6.23
+Twice Around the Tree,kroB150,150,26130,36628,1.4,0.06,1.14
+Christofides,kroB150,150,26130,35142,1.34,0.61,1.01
+Branch and Bound,pr152,152,73682,NA,NA,NA,6.46
+Twice Around the Tree,pr152,152,73682,87933,1.19,0.06,1.03
+Christofides,pr152,152,73682,87574,1.19,0.08,1.03
+Branch and Bound,u159,159,42080,NA,NA,NA,7.31
+Twice Around the Tree,u159,159,42080,57738,1.37,0.07,1.28
+Christofides,u159,159,42080,56409,1.34,0.31,1.14
+Branch and Bound,rat195,195,2323,NA,NA,NA,12.72
+Twice Around the Tree,rat195,195,2323,3318,1.43,0.11,1.92
+Christofides,rat195,195,2323,2823,1.22,0.58,1.78
+Branch and Bound,d198,198,15780,NA,NA,NA,13.28
+Twice Around the Tree,d198,198,15780,19219,1.22,0.11,2.0
+Christofides,d198,198,15780,20194,1.28,0.70,1.86
+Branch and Bound,kroA200,200,29368,NA,NA,NA,13.65
+Twice Around the Tree,kroA200,200,29368,40342,1.37,0.11,2.03
+Christofides,kroA200,200,29368,39032,1.33,1.17,1.89
+Branch and Bound,kroB200,200,29437,NA,NA,NA,13.64
+Twice Around the Tree,kroB200,200,29437,41188,1.4,0.11,2.03
+Christofides,kroB200,200,29437,40300,1.37,0.82,1.89
+Branch and Bound,ts225,225,126643,NA,NA,NA,18.9
+Twice Around the Tree,ts225,225,126643,187645,1.48,0.14,2.56
+Christofides,ts225,225,126643,174282,1.38,0.22,2.42
+Branch and Bound,tsp225,225,3919,NA,NA,NA,18.89
+Twice Around the Tree,tsp225,225,3919,5104,1.3,0.14,2.56
+Christofides,tsp225,225,3919,5340,1.36,0.79,2.43
+Branch and Bound,pr226,226,80369,NA,NA,NA,19.12
+Twice Around the Tree,pr226,226,80369,116693,1.45,0.14,2.58
+Christofides,pr226,226,80369,116737,1.45,0.80,2.45
+Branch and Bound,gil262,262,2378,NA,NA,NA,28.86
+Twice Around the Tree,gil262,262,2378,3371,1.42,0.20,3.45
+Christofides,gil262,262,2378,3059,1.29,1.82,3.31
+Branch and Bound,pr264,264,49135,NA,NA,NA,29.52
+Twice Around the Tree,pr264,264,49135,66171,1.35,0.19,3.53
+Christofides,pr264,264,49135,72688,1.48,0.61,3.39
+Branch and Bound,a280,280,2579,NA,NA,NA,34.81
+Twice Around the Tree,a280,280,2579,3624,1.41,0.22,3.97
+Christofides,a280,280,2579,3344,1.3,1.38,3.83
+Branch and Bound,pr299,299,48191,NA,NA,NA,42.05
+Twice Around the Tree,pr299,299,48191,64863,1.35,0.25,4.51
+Christofides,pr299,299,48191,65851,1.37,2.64,4.37
+Branch and Bound,lin318,318,42029,NA,NA,NA,50.3
+Twice Around the Tree,lin318,318,42029,58168,1.38,0.30,5.1
+Christofides,lin318,318,42029,54550,1.3,3.38,4.96
+Branch and Bound,linhp318,318,41345,NA,NA,NA,50.28
+Twice Around the Tree,linhp318,318,41345,58168,1.41,0.33,5.1
+Christofides,linhp318,318,41345,54550,1.32,3.36,4.96
+Branch and Bound,rd400,400,15281,NA,NA,NA,96.64
+Twice Around the Tree,rd400,400,15281,20289,1.33,0.53,8.07
+Christofides,rd400,400,15281,20249,1.33,10.25,7.93
+Branch and Bound,fl417,417,11861,NA,NA,NA,109.04
+Twice Around the Tree,fl417,417,11861,16226,1.37,0.54,8.67
+Christofides,fl417,417,11861,17086,1.44,3.99,8.53
+Branch and Bound,pr439,439,107217,NA,NA,NA,126.75
+Twice Around the Tree,pr439,439,107217,144615,1.35,0.62,9.66
+Christofides,pr439,439,107217,148650,1.39,4.21,9.52
+Branch and Bound,pcb442,442,50778,NA,NA,NA,128.78
+Twice Around the Tree,pcb442,442,50778,69609,1.37,0.63,9.78
+Christofides,pcb442,442,50778,67105,1.32,7.97,9.64
+Branch and Bound,d493,493,35002,NA,NA,NA,176.5
+Twice Around the Tree,d493,493,35002,45428,1.3,0.79,12.17
+Christofides,d493,493,35002,45509,1.3,13.25,12.03
+Branch and Bound,u574,574,36905,NA,NA,NA,274.53
+Twice Around the Tree,u574,574,36905,49061,1.33,1.10,16.54
+Christofides,u574,574,36905,48986,1.33,21.09,16.4
+Branch and Bound,rat575,575,6773,NA,NA,NA,275.3
+Twice Around the Tree,rat575,575,6773,9406,1.39,1.10,16.59
+Christofides,rat575,575,6773,8693,1.28,24.29,16.45
+Branch and Bound,p654,654,34643,NA,NA,NA,344.23
+Twice Around the Tree,p654,654,34643,49174,1.42,1.39,21.41
+Christofides,p654,654,34643,48433,1.4,3.64,21.27
+Branch and Bound,d657,657,48912,NA,NA,NA,368.49
+Twice Around the Tree,d657,657,48912,65731,1.34,1.48,21.59
+Christofides,d657,657,48912,64195,1.31,31.99,21.45
+Branch and Bound,u724,724,41910,NA,NA,NA,322.64
+Twice Around the Tree,u724,724,41910,57943,1.38,1.81,26.33
+Christofides,u724,724,41910,55883,1.33,40.11,26.19
+Branch and Bound,rat783,783,8806,NA,NA,NA,330.23
+Twice Around the Tree,rat783,783,8806,12053,1.37,2.11,30.68
+Christofides,rat783,783,8806,11808,1.34,61.86,30.54
+Branch and Bound,pr1002,1002,259045,NA,NA,NA,274.78
+Twice Around the Tree,pr1002,1002,259045,342245,1.32,3.57,50.08
+Christofides,pr1002,1002,259045,352597,1.36,93.10,49.94
+Branch and Bound,u1060,1060,224094,NA,NA,NA,231.98
+Twice Around the Tree,u1060,1060,224094,302563,1.35,4.08,56.06
+Christofides,u1060,1060,224094,299600,1.34,123.56,55.92
+Branch and Bound,vm1084,1084,239297,NA,NA,NA,201.89
+Twice Around the Tree,vm1084,1084,239297,315152,1.32,4.35,58.97
+Christofides,vm1084,1084,239297,319492,1.34,63.16,58.84
+Branch and Bound,pcb1173,1173,56892,NA,NA,NA,198.82
+Twice Around the Tree,pcb1173,1173,56892,80695,1.42,5.14,68.81
+Christofides,pcb1173,1173,56892,81352,1.43,115.73,68.67
+Branch and Bound,d1291,1291,50801,NA,NA,NA,169.59
+Twice Around the Tree,d1291,1291,50801,74659,1.47,6.43,82.83
+Christofides,d1291,1291,50801,62576,1.23,31.23,82.69
+Branch and Bound,rl1304,1304,252948,NA,NA,NA,151.75
+Twice Around the Tree,rl1304,1304,252948,347848,1.38,6.52,85.17
+Christofides,rl1304,1304,252948,354592,1.4,31.01,85.03
+Branch and Bound,rl1323,1323,270199,NA,NA,NA,147.7
+Twice Around the Tree,rl1323,1323,270199,381229,1.41,6.69,87.46
+Christofides,rl1323,1323,270199,370872,1.37,31.91,87.32
+Branch and Bound,nrw1379,1379,56638,NA,NA,NA,141.51
+Twice Around the Tree,nrw1379,1379,56638,78953,1.39,7.43,95.36
+Christofides,nrw1379,1379,56638,77250,1.36,409.93,95.22
+Branch and Bound,fl1400,1400,20127,NA,NA,NA,127.45
+Twice Around the Tree,fl1400,1400,20127,27464,1.36,7.36,98.03
+Christofides,fl1400,1400,20127,30522,1.52,381.37,97.89
+Branch and Bound,u1432,1432,152970,NA,NA,NA,122.88
+Twice Around the Tree,u1432,1432,152970,214442,1.4,7.77,102.16
+Christofides,u1432,1432,152970,205833,1.35,124.21,102.02
+Branch and Bound,fl1577,1577,22249,NA,NA,NA,100.59
+Twice Around the Tree,fl1577,1577,22249,31230,1.4,9.47,124.11
+Christofides,fl1577,1577,22249,30668,1.38,79.38,123.97
+Branch and Bound,d1655,1655,62128,NA,NA,NA,70.63
+Twice Around the Tree,d1655,1655,62128,85740,1.38,10.82,137.12
+Christofides,d1655,1655,62128,84268,1.36,155.52,136.99
+Branch and Bound,vm1748,1748,336556,NA,NA,NA,52.49
+Twice Around the Tree,vm1748,1748,336556,446062,1.33,12.35,153.05
+Christofides,vm1748,1748,336556,464192,1.38,250.09,152.91
+Branch and Bound,u1817,1817,57201,NA,NA,NA,94.62
+Twice Around the Tree,u1817,1817,57201,83600,1.46,13.54,164.32
+Christofides,u1817,1817,57201,76769,1.34,187.36,164.18
+Branch and Bound,rl1889,1889,316536,NA,NA,NA,44.42
+Twice Around the Tree,rl1889,1889,316536,451753,1.43,15.45,178.15
+Christofides,rl1889,1889,316536,430518,1.36,100.81,178.01
+Branch and Bound,d2103,2103,80450,NA,NA,NA,7.2
+Twice Around the Tree,d2103,2103,80450,124534,1.55,21.61,221.13
+Christofides,d2103,2103,80450,93276,1.16,25.32,220.99
+Branch and Bound,u2152,2152,64253,NA,NA,NA,60.6
+Twice Around the Tree,u2152,2152,64253,95092,1.48,21.42,230.54
+Christofides,u2152,2152,64253,89902,1.4,269.87,230.54
+Branch and Bound,u2319,2319,234256,NA,NA,NA,37.35
+Twice Around the Tree,u2319,2319,234256,320610,1.37,24.72,267.01
+Christofides,u2319,2319,234256,317707,1.36,1010.35,267.01
+Branch and Bound,pr2392,2392,378032,NA,NA,NA,33.63
+Twice Around the Tree,pr2392,2392,378032,523832,1.39,26.17,285.36
+Christofides,pr2392,2392,378032,514075,1.36,962.62,285.36
+Branch and Bound,pcb3038,3038,137694,NA,NA,NA,0.74
+Twice Around the Tree,pcb3038,3038,137694,196554,1.43,44.85,460.12
+Christofides,pcb3038,3038,137694,188048,1.37,2845.15,460.12
+Branch and Bound,fl3795,3795,28772,NA,NA,NA,0.96
+Twice Around the Tree,fl3795,3795,28772,39110,1.36,108.45,719.38

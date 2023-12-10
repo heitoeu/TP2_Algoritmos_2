@@ -3,7 +3,7 @@ import heapq
 import time
 
 
-def tsp_bnb(A, tempo_limite=1):
+def tsp_bnb(A, tempo_limite=5):
     # Monitorar o tempo
     inicio_tempo = time.time()
 
@@ -49,11 +49,8 @@ def tsp_bnb(A, tempo_limite=1):
     # Parar a execução se estiver demorando muito (pior caso ainda é O(n!))
         tempo_atual = time.time() - inicio_tempo
         if tempo_atual > tempo_limite:
-            return "NA", "NA", "NA"
+            return "NA", "NA"
 
     t = time.time() - inicio_tempo
     tempo_execucao = "{:.2f}".format(t)
-    # print(f"Tempo de Execução: {tempo_execucao} segundos")
-    # print(f"Solução:{sol+[0]} custo {best}")
-    # print(f"Custo {best}")
-    return best, tempo_execucao, 0
+    return best, tempo_execucao

@@ -4,6 +4,8 @@ from src.algorithms.tsp_christofides import *
 from src.algorithms.distance import euclidean_distance
 import os
 import csv
+import time as t
+import tracemalloc
 
 
 def read_tsp_file(file_path):
@@ -32,8 +34,8 @@ def read_tsp_file(file_path):
     return node_coordinates
 
 
-def read_dataset_names(file_path):
-    dataset_names = []
+def read_dataset(file_path):
+    dataset_info = []
 
     with open(file_path, 'r') as file:
         # Pular a primeira linha, pois contém os cabeçalhos
@@ -43,10 +45,15 @@ def read_dataset_names(file_path):
             # Dividir a linha usando tabulação como delimitador
             parts = line.split('\t')
 
-            # Adicionar o nome do dataset à lista
-            dataset_names.append(parts[0])
+            # Adicionar o nome do dataset e o limiar à lista
+            dataset_info.append({
+                'name': parts[0],
+                'nodes': int(parts[1]),
+                # Avaliar a expressão para lidar com casos como [22204,22249]
+                'threshold': eval(parts[2])
+            })
 
-    return dataset_names
+    return dataset_info
 
 
 def calculate_distance_matrix(node_coordinates):
@@ -63,25 +70,36 @@ def calculate_distance_matrix(node_coordinates):
     return distance_matrix
 
 
-def create_networkx_graph(node_coordinates):
+def create_networkx_graph(node_coordinates, timeout=600):
     num_nodes = len(node_coordinates)
     g = nx.Graph()
 
     g.add_nodes_from(range(num_nodes))
 
-    # Computar as arestas e seus pesos na lista
-    edges = [(i, j, euclidean_distance(node_coordinates[i], node_coordinates[j]))
-             for i in range(num_nodes) for j in range(i + 1, num_nodes)]
+    # Obtém o tempo inicial
+    start_time = t.time()
 
-    # Adiciona as arestas ao grafo com os pesos
-    g.add_weighted_edges_from(edges)
+    # Loop de adição de arestas
+    for i in range(num_nodes):
+        for j in range(i + 1, num_nodes):
+            # Verifica o tempo decorrido em cada iteração
+            elapsed_time = t.time() - start_time
+
+            # Se o tempo excedeu o limite, retorna None
+            if elapsed_time > timeout:
+                return None
+
+            # Adiciona a aresta ao grafo com o peso
+            g.add_edge(i, j, weight=euclidean_distance(
+                node_coordinates[i], node_coordinates[j]))
 
     return g
 
 
 data_set_path = os.path.abspath(
     os.path.join('experiments', f'tp2_datasets.txt'))
-instance = read_dataset_names(data_set_path)
+
+dataset_info = read_dataset(data_set_path)
 
 # Caminho para o arquivo CSV de saída
 output_csv_path = os.path.abspath(os.path.join('output', 'resultados_tsp.csv'))
@@ -93,27 +111,76 @@ with open(output_csv_path, 'w', newline='') as csvfile:
 
     # Escrever cabeçalhos no arquivo CSV
     csv_writer.writerow(
-        ['Instance', 'Algorithm', 'Cost', 'Time', 'Memory'])
+        ['Algorithm', 'Instance', 'Nodes', 'Limiar', 'Cost', 'Quality', 'Time(sec)', 'Memory(MB)'])
 
-    for i in instance:
+    for info in dataset_info:
+        # Obtendo infos de cada instância
+        dataset_name = info['name']
+        dataset_nodes = info['nodes']
+        dataset_limiar = info['threshold']
+        if (type(dataset_limiar) == list):
+            dataset_limiar = dataset_limiar[1]
 
-        file_path = os.path.abspath(os.path.join('lib', f'{i}.tsp'))
+        print("Executando Instancia: ", dataset_name)
 
+        file_path = os.path.abspath(os.path.join('lib', f'{dataset_name}.tsp'))
         # Criando os Grafos
         node_coordinates = read_tsp_file(file_path)
         graph_matrix = calculate_distance_matrix(node_coordinates)
         graph_list = create_networkx_graph(node_coordinates)
 
         # Algoritmo TSP_BNB
-        best_cost, time, memory = tsp_bnb(graph_matrix)
-        csv_writer.writerow([i, 'TSP_BNB', best_cost, time, memory])
+        tracemalloc.reset_peak()
+        tracemalloc.start()
+        # TSP_BNB
+        best_cost, time = tsp_bnb(graph_matrix)
+
+        current_memory, peak_memory = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        memory = round(peak_memory / (1024 ** 2), 2)
+
+        quality = best_cost/dataset_limiar if best_cost != "NA" else "NA"
+        if type(quality) != str:
+            quality = round(quality, 2)
+        csv_writer.writerow(
+            ['Branch and Bound', dataset_name, dataset_nodes, dataset_limiar, best_cost, quality, time, memory])
 
         # Algoritmo TSP_TAT
-        best_cost, time, memory = tsp_tat(graph_list)
-        csv_writer.writerow([i, 'TSP_TAT', best_cost, time, memory])
+        if (graph_list != None):
+            tracemalloc.reset_peak()
+            tracemalloc.start()
+            # TSP_TAT
+            best_cost, time = tsp_tat(graph_list)
+
+            current_memory, peak_memory = tracemalloc.get_traced_memory()
+            tracemalloc.stop()
+            memory = round(peak_memory / (1024 ** 2), 2)
+
+            quality = best_cost/dataset_limiar if best_cost != "NA" else "NA"
+            if type(quality) != str:
+                quality = round(quality, 2)
+            csv_writer.writerow(
+                ['Twice Around the Tree', dataset_name, dataset_nodes, dataset_limiar, best_cost, quality, time, memory])
+        else:
+            csv_writer.writerow(
+                ['Twice Around the Tree', dataset_name, dataset_nodes, dataset_limiar, "NA", "NA", "NA", "NA"])
 
         # Algoritmo TSP_CHRIS
-        best_cost, time, memory = tsp_christofides(graph_list)
-        csv_writer.writerow([i, 'TSP_CHRIS', best_cost, time, memory])
+        if (graph_list != None):
+            tracemalloc.reset_peak()
+            tracemalloc.start()
+            # TSP_CHRIS
+            best_cost, time = tsp_christofides(graph_list)
 
-        # csv_writer.writerow('\n')
+            current_memory, peak_memory = tracemalloc.get_traced_memory()
+            tracemalloc.stop()
+            memory = round(peak_memory / (1024 ** 2), 2)
+
+            quality = best_cost/dataset_limiar if best_cost != "NA" else "NA"
+            if type(quality) != str:
+                quality = round(quality, 2)
+            csv_writer.writerow(
+                ['Christofides', dataset_name, dataset_nodes, dataset_limiar, best_cost, quality, time, memory])
+        else:
+            csv_writer.writerow(
+                ['Christofides', dataset_name, dataset_nodes, dataset_limiar, "NA", "NA", "NA", "NA"])

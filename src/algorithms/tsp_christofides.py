@@ -30,7 +30,5 @@ def tsp_christofides(g):
 
     t = time.time() - inicio_tempo
     tempo_execucao = "{:.2f}".format(t)
-    # print(f"Tempo de Execução: {tempo_execucao} segundos")
-    # print(f"Custo {approximative_best}")
 
-    return approximative_best, tempo_execucao, 0
+    return approximative_best, tempo_execucao
