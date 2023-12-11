@@ -19,5 +19,5 @@ O algoritmo testa três algoritmos de TSP Euclidiano utilizando a TSPLIB já imp
 
 ## Uso
 
-Assim que os arquivos forem baixados, é necessário escrever no arquivo "experiments/tp2_datasets" quais serão os experimentos testados em seguida basta executar o comando "python -m experiments.tsp_experiments".
+Assim que os arquivos forem baixados, é necessário escrever no arquivo "experiments/tp2_datasets" quais serão os experimentos testados, em seguida basta executar o comando "python -m experiments.tsp_experiments".
 O resultado será fornecido em um arquivo formato CSV dentro da pasta output com o nome de "resultados_tsp".
